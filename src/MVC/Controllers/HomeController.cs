@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MVC.Models;
+using Shared;
 using System.Diagnostics;
 
 namespace MVC.Controllers
@@ -7,15 +8,17 @@ namespace MVC.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly Database _database;
 
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
+            _database = new Database();
         }
 
         public IActionResult Index()
         {
-            return View();
+            return View(_database.Students);
         }
 
         public IActionResult Privacy()
